@@ -14,17 +14,13 @@ public class Solution {
     }
 
     public int optimalLiniarSearch(List<Integer> arr, int target){
-        int last = arr.get(arr.size() - 1);
-        arr.remove(arr.size() - 1);
         arr.add(target);
         
         int i = 0;
-        for(; arr.get(i) != target; i++) {}
-        
+        for(; arr.get(i) != target; i++) {}        
         
         arr.remove(arr.size() - 1);
-        arr.add(last);
-        return ((i != arr.size() - 1) || target == last) ? i : -1;
+        return i >= arr.size() ? -1 : i;
     }
 
     public int liniarSearchInSortedArray(List<Integer> arr, int target){
