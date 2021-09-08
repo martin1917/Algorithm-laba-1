@@ -1,6 +1,9 @@
 import ui.UserInterface;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -15,7 +18,7 @@ public class App {
         Solution solution = new Solution();
 
         int size = 100_000;
-        int[] array = generateArray(size);
+        List<Integer> array = generateArray(size);
 
         ui.getLeftButton().addActionListener(e -> {
             int value = (int) ui.getLeftSpinner().getValue();
@@ -32,12 +35,12 @@ public class App {
             ui.getTimeFieldLeft2().setText("" + time2);
             ui.getIndexFieldLeft2().setText("" + index2);
         });
-        
+
         ui.getRightButton().addActionListener(e -> {
             int value = (int) ui.getRightSpinner().getValue();
 
-            int[] arrayCopy = array.clone();
-            Arrays.sort(arrayCopy);
+            List<Integer> arrayCopy = new ArrayList<>(array);
+            Collections.sort(arrayCopy);
 
             int index1 = solution.optimalLiniarSearch(arrayCopy, value);
             double time1 = Measure.getTime(arrayCopy, value, solution::optimalLiniarSearch);            
@@ -62,12 +65,12 @@ public class App {
         });
     }
 
-    private static int[] generateArray(int size){
+    private static List<Integer> generateArray(int size){
         Random rand = new Random();
-        int[] arr = new int[size];
+        List<Integer> arr = new ArrayList<Integer>(size);
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = rand.nextInt(25_000);
+        for (int i = 0; i < size; i++) {
+            arr.add(rand.nextInt(25_000));
         }
 
         return arr;
